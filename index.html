@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Surigao City Pathfinding Visualizer</h1>
+            <h1>🗺️ Surigao City Pathfinding Visualizer</h1>
             <p>27 Barangays + Extensions – OSRM Real-Road Integration</p>
         </header>
 
@@ -92,7 +92,7 @@
 
             <div class="results-panel">
                 <div class="result-card greedy" id="greedyResults" style="display:none;">
-                    <h3>🚀 Greedy Best-First Search</h3>
+                    <h3>🎯 Greedy Best-First Search</h3>
                     <div id="greedyMetrics"></div>
                     <div class="expansion-list" id="greedyExpansions"></div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="expansion-list" id="astarExpansions"></div>
                 </div>
                 <div class="result-card sld" id="sldPanel">
-                    <h3>SLD to Taft (Pob.)</h3>
+                    <h3>📏 SLD to Taft (Pob.)</h3>
                     <div class="sld-list" id="sldList"></div>
                 </div>
             </div>
@@ -124,40 +124,40 @@
         const STEP_DELAY = 1200;
         const PATH_SEG_DELAY = 900;
         
-        // >> UPDATED COORDINATES BASED ON REQUEST
+        // ✅ CORRECTED COORDINATES - Geographic Displacement Fixed
         const barangays = {
-            "Alegria": { lat: 9.5, lon: 125.6 },
-            "Anomar": { lat: 9.7712, lon: 125.4673 }, 
-            "Balibayon": { lat: 9.7900, lon: 125.4350 }, // Corrected
+            "Alegria": { lat: 9.464419, lon: 125.576105 },  // FIXED: was 9.5, 125.6 (31km off!)
+            "Anomar": { lat: 9.680451, lon: 125.503921 },
+            "Balibayon": { lat: 9.763206, lon: 125.524887 },
             "Cagniog": { lat: 9.7619, lon: 125.5045 },
             "Canlanipa (Pob.)": { lat: 9.7759, lon: 125.4928 },
-            "Capalayan": { lat: 9.74, lon: 125.55 },
+            "Capalayan": { lat: 9.740053, lon: 125.544303 },  // FIXED: was 9.74, 125.55
             "Ipil": { lat: 9.7922, lon: 125.4396 },
-            "Libuac": { lat: 9.7766, lon: 125.419 },
+            "Libuac": { lat: 9.7766, lon: 125.4190 },
             "Lipata": { lat: 9.8128, lon: 125.4553 },
-            "Luna (Pob.)": { lat: 9.7671, lon: 125.4833 },
-            "Mabini": { lat: 9.7212, lon: 125.4449 },
+            "Luna (Pob.)": { lat: 9.755478, lon: 125.482792 },
+            "Mabini": { lat: 9.699094, lon: 125.481677 },
             "Mabua": { lat: 9.8098, lon: 125.4409 },
-            "Mapawa": { lat: 9.7100, lon: 125.5100 }, // Corrected
+            "Mapawa": { lat: 9.728496, lon: 125.520978 },  // FIXED: was 9.71, 125.51
             "Mat-i": { lat: 9.7182, lon: 125.4768 },
             "Punta Bilar": { lat: 9.8227, lon: 125.4443 },
-            "Quezon": { lat: 9.7400, lon: 125.4500 }, // Corrected
-            "Rizal": { lat: 9.7650, lon: 125.4500 }, // Corrected
-            "Sabang": { lat: 9.7972, lon: 125.4589 }, // Corrected
+            "Quezon": { lat: 9.720854, lon: 125.506360 },  // FIXED: was 9.74, 125.45
+            "Rizal": { lat: 9.780575, lon: 125.465010 },
+            "Sabang": { lat: 9.797994, lon: 125.472118 },
             "San Juan (Pob.)": { lat: 9.7904, lon: 125.4839 },
-            "San Roque": { lat: 9.7750, lon: 125.4300 }, // Corrected
+            "San Roque": { lat: 9.753461, lon: 125.473840 },  // FIXED: was 9.775, 125.43
             "Serna": { lat: 9.7243, lon: 125.4832 },
-            "Silop": { lat: 9.7580, lon: 125.4650 }, // Corrected
-            "Sukailang": { lat: 9.67, lon: 125.5 },
+            "Silop": { lat: 9.742553, lon: 125.510692 },  // FIXED: was 9.758, 125.465
+            "Sukailang": { lat: 9.672743, lon: 125.503374 },  // FIXED: was 9.67, 125.5
             "Taft (Pob.)": { lat: 9.7847, lon: 125.4975 },
-            "Togbongon": { lat: 9.76, lon: 125.48 },
-            "Trinidad": { lat: 9.7042, lon: 125.459 },
+            "Togbongon": { lat: 9.761290, lon: 125.474949 },  // FIXED: was 9.76, 125.48
+            "Trinidad": { lat: 9.688028, lon: 125.509034 },
             "Washington (Pob.)": { lat: 9.7843, lon: 125.4887 },
-            // >> NEW ENTITIES
-            "San Francisco": { lat: 9.7500, lon: 125.4700 }, 
-            "Bonifacio": { lat: 9.7600, lon: 125.4900 },
-            "Orok": { lat: 9.7300, lon: 125.5000 },
-            "Nabago": { lat: 9.7400, lon: 125.5100 }
+            // Extended barangays
+            "San Francisco": { lat: 9.778752, lon: 125.421216 },  // FIXED: was 9.75, 125.47
+            "Bonifacio": { lat: 9.738234, lon: 125.496064 },  // FIXED: was 9.76, 125.49
+            "Orok": { lat: 9.755745, lon: 125.543058 },  // FIXED: was 9.73, 125.50
+            "Nabago": { lat: 9.733882, lon: 125.563802 }  // FIXED: was 9.74, 125.51
         };
 
         const heuristic = {
@@ -168,7 +168,6 @@
             'Rizal': 5.23, 'Sabang': 4.15, 'San Juan (Pob.)': 1.61, 'San Roque': 7.11,
             'Serna': 6.89, 'Silop': 3.82, 'Sukailang': 12.75, 'Taft (Pob.)': 0.00,
             'Togbongon': 3.34, 'Trinidad': 9.89, 'Washington (Pob.)': 0.96,
-            // >> NEW ESTIMATES
             'San Francisco': 4.5, 'Bonifacio': 2.2, 'Orok': 5.1, 'Nabago': 6.0
         };
 
@@ -202,30 +201,122 @@
                 {"neighbor": "Togbongon", "distance": 5.2},
                 {"neighbor": "San Francisco", "distance": 2.0}
             ],
-            "Canlanipa (Pob.)": [{"neighbor": "Taft (Pob.)", "distance": 1.4}, {"neighbor": "Cagniog", "distance": 2.8}, {"neighbor": "Rizal", "distance": 3.2}, {"neighbor": "Sabang", "distance": 2.3}],
-            "Cagniog": [{"neighbor": "Taft (Pob.)", "distance": 3.2}, {"neighbor": "Luna (Pob.)", "distance": 3.5}, {"neighbor": "Canlanipa (Pob.)", "distance": 2.8}, {"neighbor": "Togbongon", "distance": 2.9}, {"neighbor": "Sabang", "distance": 1.8}, {"neighbor": "Orok", "distance": 3.0}],
-            "Ipil": [{"neighbor": "Washington (Pob.)", "distance": 3.2}, {"neighbor": "Sabang", "distance": 1.9}, {"neighbor": "Mabua", "distance": 3.4}, {"neighbor": "Anomar", "distance": 5.8}],
-            "Lipata": [{"neighbor": "San Juan (Pob.)", "distance": 6.8}, {"neighbor": "Punta Bilar", "distance": 3.2}, {"neighbor": "Rizal", "distance": 4.5}, {"neighbor": "Balibayon", "distance": 5.2}],
-            "Mabua": [{"neighbor": "Ipil", "distance": 3.4}, {"neighbor": "Sabang", "distance": 2.2}, {"neighbor": "Anomar", "distance": 3.9}, {"neighbor": "Mabini", "distance": 4.7}],
-            "Punta Bilar": [{"neighbor": "San Juan (Pob.)", "distance": 8.5}, {"neighbor": "Rizal", "distance": 6.5}, {"neighbor": "Lipata", "distance": 3.2}, {"neighbor": "Balibayon", "distance": 4.8}],
-            "Rizal": [{"neighbor": "Washington (Pob.)", "distance": 4.5}, {"neighbor": "San Juan (Pob.)", "distance": 5.2}, {"neighbor": "Luna (Pob.)", "distance": 4.8}, {"neighbor": "Canlanipa (Pob.)", "distance": 3.2}, {"neighbor": "Punta Bilar", "distance": 6.5}, {"neighbor": "Lipata", "distance": 4.5}],
-            "Sabang": [{"neighbor": "Taft (Pob.)", "distance": 2.5}, {"neighbor": "Canlanipa (Pob.)", "distance": 2.3}, {"neighbor": "Cagniog", "distance": 1.8}, {"neighbor": "Ipil", "distance": 1.9}, {"neighbor": "Mabua", "distance": 2.2}, {"neighbor": "Togbongon", "distance": 2.4}],
-            "Togbongon": [{"neighbor": "Luna (Pob.)", "distance": 5.2}, {"neighbor": "Cagniog", "distance": 2.9}, {"neighbor": "Sabang", "distance": 2.4}, {"neighbor": "Mat-i", "distance": 9.5}],
+            "Canlanipa (Pob.)": [
+                {"neighbor": "Taft (Pob.)", "distance": 1.4},
+                {"neighbor": "Cagniog", "distance": 2.8},
+                {"neighbor": "Rizal", "distance": 3.2},
+                {"neighbor": "Sabang", "distance": 2.3}
+            ],
+            "Cagniog": [
+                {"neighbor": "Taft (Pob.)", "distance": 3.2},
+                {"neighbor": "Luna (Pob.)", "distance": 3.5},
+                {"neighbor": "Canlanipa (Pob.)", "distance": 2.8},
+                {"neighbor": "Togbongon", "distance": 2.9},
+                {"neighbor": "Sabang", "distance": 1.8},
+                {"neighbor": "Orok", "distance": 3.0}
+            ],
+            "Ipil": [
+                {"neighbor": "Washington (Pob.)", "distance": 3.2},
+                {"neighbor": "Sabang", "distance": 1.9},
+                {"neighbor": "Mabua", "distance": 3.4},
+                {"neighbor": "Anomar", "distance": 5.8}
+            ],
+            "Lipata": [
+                {"neighbor": "San Juan (Pob.)", "distance": 6.8},
+                {"neighbor": "Punta Bilar", "distance": 3.2},
+                {"neighbor": "Rizal", "distance": 4.5},
+                {"neighbor": "Balibayon", "distance": 5.2}
+            ],
+            "Mabua": [
+                {"neighbor": "Ipil", "distance": 3.4},
+                {"neighbor": "Sabang", "distance": 2.2},
+                {"neighbor": "Anomar", "distance": 3.9},
+                {"neighbor": "Mabini", "distance": 4.7}
+            ],
+            "Punta Bilar": [
+                {"neighbor": "San Juan (Pob.)", "distance": 8.5},
+                {"neighbor": "Rizal", "distance": 6.5},
+                {"neighbor": "Lipata", "distance": 3.2},
+                {"neighbor": "Balibayon", "distance": 4.8}
+            ],
+            "Rizal": [
+                {"neighbor": "Washington (Pob.)", "distance": 4.5},
+                {"neighbor": "San Juan (Pob.)", "distance": 5.2},
+                {"neighbor": "Luna (Pob.)", "distance": 4.8},
+                {"neighbor": "Canlanipa (Pob.)", "distance": 3.2},
+                {"neighbor": "Punta Bilar", "distance": 6.5},
+                {"neighbor": "Lipata", "distance": 4.5}
+            ],
+            "Sabang": [
+                {"neighbor": "Taft (Pob.)", "distance": 2.5},
+                {"neighbor": "Canlanipa (Pob.)", "distance": 2.3},
+                {"neighbor": "Cagniog", "distance": 1.8},
+                {"neighbor": "Ipil", "distance": 1.9},
+                {"neighbor": "Mabua", "distance": 2.2},
+                {"neighbor": "Togbongon", "distance": 2.4}
+            ],
+            "Togbongon": [
+                {"neighbor": "Luna (Pob.)", "distance": 5.2},
+                {"neighbor": "Cagniog", "distance": 2.9},
+                {"neighbor": "Sabang", "distance": 2.4},
+                {"neighbor": "Mat-i", "distance": 9.5}
+            ],
             "Alegria": [{"neighbor": "Silop", "distance": 3.2}],
-            "Anomar": [{"neighbor": "Ipil", "distance": 5.8}, {"neighbor": "Mabua", "distance": 3.9}, {"neighbor": "Mabini", "distance": 2.9}, {"neighbor": "Balibayon", "distance": 2.8}, {"neighbor": "Capalayan", "distance": 4.2}],
-            "Balibayon": [{"neighbor": "Lipata", "distance": 5.2}, {"neighbor": "Punta Bilar", "distance": 4.8}, {"neighbor": "Anomar", "distance": 2.8}, {"neighbor": "Mabini", "distance": 3.7}],
-            "Capalayan": [{"neighbor": "Anomar", "distance": 4.2}, {"neighbor": "Mapawa", "distance": 2.6}, {"neighbor": "Silop", "distance": 6.7}, {"neighbor": "Nabago", "distance": 3.5}],
+            "Anomar": [
+                {"neighbor": "Ipil", "distance": 5.8},
+                {"neighbor": "Mabua", "distance": 3.9},
+                {"neighbor": "Mabini", "distance": 2.9},
+                {"neighbor": "Balibayon", "distance": 2.8},
+                {"neighbor": "Capalayan", "distance": 4.2}
+            ],
+            "Balibayon": [
+                {"neighbor": "Lipata", "distance": 5.2},
+                {"neighbor": "Punta Bilar", "distance": 4.8},
+                {"neighbor": "Anomar", "distance": 2.8},
+                {"neighbor": "Mabini", "distance": 3.7}
+            ],
+            "Capalayan": [
+                {"neighbor": "Anomar", "distance": 4.2},
+                {"neighbor": "Mapawa", "distance": 2.6},
+                {"neighbor": "Silop", "distance": 6.7},
+                {"neighbor": "Nabago", "distance": 3.5}
+            ],
             "Libuac": [{"neighbor": "Trinidad", "distance": 5.5}],
-            "Mabini": [{"neighbor": "Anomar", "distance": 2.9}, {"neighbor": "Balibayon", "distance": 3.7}, {"neighbor": "Mabua", "distance": 4.7}, {"neighbor": "Mapawa", "distance": 4.5}],
-            "Mapawa": [{"neighbor": "Capalayan", "distance": 2.6}, {"neighbor": "Mabini", "distance": 4.5}],
+            "Mabini": [
+                {"neighbor": "Anomar", "distance": 2.9},
+                {"neighbor": "Balibayon", "distance": 3.7},
+                {"neighbor": "Mabua", "distance": 4.7},
+                {"neighbor": "Mapawa", "distance": 4.5}
+            ],
+            "Mapawa": [
+                {"neighbor": "Capalayan", "distance": 2.6},
+                {"neighbor": "Mabini", "distance": 4.5}
+            ],
             "Mat-i": [{"neighbor": "Togbongon", "distance": 9.5}],
-            "Silop": [{"neighbor": "Alegria", "distance": 3.2}, {"neighbor": "Capalayan", "distance": 6.7}],
-            "Sukailang": [{"neighbor": "Togbongon", "distance": 4.5}, {"neighbor": "Cagniog", "distance": 5.2}],
-            "Trinidad": [{"neighbor": "Mat-i", "distance": 6.8}, {"neighbor": "Libuac", "distance": 5.5}],
-            "Quezon": [{"neighbor": "Mat-i", "distance": 3.5}, {"neighbor": "Serna", "distance": 4.2}],
-            "Serna": [{"neighbor": "Quezon", "distance": 4.2}, {"neighbor": "Luna (Pob.)", "distance": 5.8}],
-            "San Roque": [{"neighbor": "Ipil", "distance": 4.8}, {"neighbor": "Balibayon", "distance": 5.5}],
-            // >> NEW CONNECTIONS (Bidirectional)
+            "Silop": [
+                {"neighbor": "Alegria", "distance": 3.2},
+                {"neighbor": "Capalayan", "distance": 6.7}
+            ],
+            "Sukailang": [
+                {"neighbor": "Togbongon", "distance": 4.5},
+                {"neighbor": "Cagniog", "distance": 5.2}
+            ],
+            "Trinidad": [
+                {"neighbor": "Mat-i", "distance": 6.8},
+                {"neighbor": "Libuac", "distance": 5.5}
+            ],
+            "Quezon": [
+                {"neighbor": "Mat-i", "distance": 3.5},
+                {"neighbor": "Serna", "distance": 4.2}
+            ],
+            "Serna": [
+                {"neighbor": "Quezon", "distance": 4.2},
+                {"neighbor": "Luna (Pob.)", "distance": 5.8}
+            ],
+            "San Roque": [
+                {"neighbor": "Ipil", "distance": 4.8},
+                {"neighbor": "Balibayon", "distance": 5.5}
+            ],
             "San Francisco": [{"neighbor": "Luna (Pob.)", "distance": 2.0}],
             "Bonifacio": [{"neighbor": "Taft (Pob.)", "distance": 1.5}],
             "Orok": [{"neighbor": "Cagniog", "distance": 3.0}],
@@ -236,6 +327,7 @@
         const goal = "Taft (Pob.)";
         let map, markers = {}, polylines = [], animationLayers = [];
         let isAnimating = false;
+        let calibrationMarkers = [];  // Track calibration markers
 
         async function fetchOSRMGeometry(startLat, startLon, endLat, endLon) {
             const url = `https://router.project-osrm.org/route/v1/driving/${startLon},${startLat};${endLon},${endLat}?overview=full&geometries=geojson`;
@@ -243,35 +335,40 @@
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.code === 'Ok' && data.routes[0]) {
-                    // Swap to [Lat, Lon] for Leaflet
                     return data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
                 }
-            } catch (error) { console.error("OSRM Fetch Failed:", error); }
+            } catch (error) {
+                console.error("OSRM Fetch Failed:", error);
+            }
             return [[startLat, startLon], [endLat, endLon]];
         }
 
-        function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
-        // >> MAIN HYDRATION LOOP
         window.onload = async function() {
             initMap();
             
             const btnAstar = document.getElementById('btnAstar');
             const originalText = btnAstar.innerHTML;
             disableButtons(true);
-            
+
             console.log("🚀 Starting OSRM Road Hydration...");
             
             for (const nodeName of Object.keys(roadNetworkData)) {
-                roadNetwork[nodeName] = []; 
+                roadNetwork[nodeName] = [];
                 const startCoords = barangays[nodeName];
                 const neighbors = roadNetworkData[nodeName];
                 
                 for (const edge of neighbors) {
                     const endCoords = barangays[edge.neighbor];
-                    btnAstar.innerHTML = `Loading Roads... (${nodeName})`;
+                    btnAstar.innerHTML = `⏳ Loading Roads... (${nodeName})`;
                     
-                    const geometry = await fetchOSRMGeometry(startCoords.lat, startCoords.lon, endCoords.lat, endCoords.lon);
+                    const geometry = await fetchOSRMGeometry(
+                        startCoords.lat, startCoords.lon,
+                        endCoords.lat, endCoords.lon
+                    );
                     
                     roadNetwork[nodeName].push({
                         neighbor: edge.neighbor,
@@ -279,15 +376,18 @@
                         geometry: geometry
                     });
                     
-                    await sleep(200); // 200ms throttle
+                    await sleep(200);
                 }
             }
             
-            // Draw background curves
             Object.keys(roadNetwork).forEach(from => {
                 roadNetwork[from].forEach(edge => {
                     if (edge.geometry) {
-                        L.polyline(edge.geometry, {color: '#cccccc', weight: 1.5, opacity: 0.4}).addTo(map);
+                        L.polyline(edge.geometry, {
+                            color: '#cccccc',
+                            weight: 1.5,
+                            opacity: 0.4
+                        }).addTo(map);
                     }
                 });
             });
@@ -302,6 +402,31 @@
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
+
+            // ✨ INTERACTIVE CALIBRATION TOOL - Click to Get Accurate Coordinates
+            map.on('click', function(e) {
+                const clickedLat = e.latlng.lat.toFixed(6);
+                const clickedLon = e.latlng.lng.toFixed(6);
+                
+                // Log to console for easy copy-paste
+                console.log(`{ lat: ${clickedLat}, lon: ${clickedLon} },`);
+                
+                // Create temporary yellow marker at clicked location
+                const calibMarker = L.marker([e.latlng.lat, e.latlng.lng], {
+                    icon: L.divIcon({
+                        html: `<div style="background: #ffff00; padding: 4px 8px; border: 2px solid #ff6600; border-radius: 5px; font-size: 11px; font-weight: bold; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">📍 CALIBRATION</div>`,
+                        iconSize: [100, 25]
+                    })
+                }).addTo(map).bindPopup(`<b>Calibration Point</b><br>Lat: ${clickedLat}<br>Lon: ${clickedLon}<br><em>Check console for copy-paste</em>`).openPopup();
+                
+                calibrationMarkers.push(calibMarker);
+                
+                // Auto-remove after 10 seconds
+                setTimeout(() => {
+                    map.removeLayer(calibMarker);
+                    calibrationMarkers = calibrationMarkers.filter(m => m !== calibMarker);
+                }, 10000);
+            });
 
             const startSelect = document.getElementById('startNode');
             Object.keys(barangays).sort().forEach(name => {
@@ -332,9 +457,11 @@
                 row.innerHTML = `<span>${name}</span><span>${dist.toFixed(2)} km</span>`;
                 sldList.appendChild(row);
             });
+
+            console.log("🎯 Interactive Calibration Mode Active!");
+            console.log("📍 Click anywhere on the map to get accurate coordinates.");
         }
 
-        // >> SEARCH ALGORITHMS
         function greedyBestFirstSearch(start) {
             const frontier = new MinHeap();
             frontier.push({ node: start, f: heuristic[start] });
@@ -356,7 +483,10 @@
                 if (current === goal) {
                     const path = [];
                     let node = current;
-                    while (node !== undefined) { path.unshift(node); node = cameFrom[node]; }
+                    while (node !== undefined) {
+                        path.unshift(node);
+                        node = cameFrom[node];
+                    }
                     return { success: true, path, cost: gCosts[current], expansions };
                 }
 
@@ -399,7 +529,10 @@
                 if (current === goal) {
                     const path = [];
                     let node = current;
-                    while (node !== undefined) { path.unshift(node); node = cameFrom[node]; }
+                    while (node !== undefined) {
+                        path.unshift(node);
+                        node = cameFrom[node];
+                    }
                     return { success: true, path, cost: gScore[goal], expansions };
                 }
 
@@ -436,7 +569,7 @@
             for (let i = 0; i < result.expansions.length; i++) {
                 const exp = result.expansions[i];
                 progressStep.textContent = `Exploring ${exp.node} (${i + 1}/${result.expansions.length})`;
-                
+
                 const expItem = document.createElement('div');
                 expItem.className = 'expansion-item current';
                 expItem.id = `exp-${algorithm}-${i}`;
@@ -448,13 +581,19 @@
                     markers[exp.node].setIcon(createPulsingIcon('#ffaa00', 20));
                 }
 
-                // DRAW POLYLINE FOR EXPLORATION
                 if (exp.parent) {
                     const parentEdges = roadNetwork[exp.parent];
                     const edgeData = parentEdges.find(e => e.neighbor === exp.node);
-                    const pathCoords = edgeData && edgeData.geometry ? edgeData.geometry : [[barangays[exp.parent].lat, barangays[exp.parent].lon], [barangays[exp.node].lat, barangays[exp.node].lon]];
+                    const pathCoords = edgeData && edgeData.geometry ? edgeData.geometry : 
+                        [[barangays[exp.parent].lat, barangays[exp.parent].lon], 
+                         [barangays[exp.node].lat, barangays[exp.node].lon]];
 
-                    const explorationLine = L.polyline(pathCoords, { color: '#ffaa00', weight: 3, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
+                    const explorationLine = L.polyline(pathCoords, {
+                        color: '#ffaa00',
+                        weight: 3,
+                        opacity: 0.7,
+                        dashArray: '8, 8'
+                    }).addTo(map);
                     animationLayers.push(explorationLine);
 
                     const pathEl = explorationLine.getElement();
@@ -474,7 +613,10 @@
                     markers[exp.node].setIcon(createMarkerIcon('#888888', 18));
                 }
                 if (animationLayers.length > 0) {
-                    animationLayers[animationLayers.length - 1].setStyle({color: '#aaaaaa', opacity: 0.3});
+                    animationLayers[animationLayers.length - 1].setStyle({
+                        color: '#aaaaaa',
+                        opacity: 0.3
+                    });
                 }
                 document.getElementById(`exp-${algorithm}-${i}`).classList.remove('current');
             }
@@ -484,13 +626,19 @@
                 for (let i = 0; i < result.path.length - 1; i++) {
                     const from = result.path[i];
                     const to = result.path[i + 1];
-                    
-                    // DRAW POLYLINE FOR FINAL PATH
+
                     const edges = roadNetwork[from];
                     const edgeData = edges.find(e => e.neighbor === to);
-                    const pathCoords = edgeData && edgeData.geometry ? edgeData.geometry : [[barangays[from].lat, barangays[from].lon], [barangays[to].lat, barangays[to].lon]];
+                    const pathCoords = edgeData && edgeData.geometry ? edgeData.geometry :
+                        [[barangays[from].lat, barangays[from].lon],
+                         [barangays[to].lat, barangays[to].lon]];
 
-                    const pathLine = L.polyline(pathCoords, { color: color, weight: 5, opacity: 0.9, dashArray: '12, 8' }).addTo(map);
+                    const pathLine = L.polyline(pathCoords, {
+                        color: color,
+                        weight: 5,
+                        opacity: 0.9,
+                        dashArray: '12, 8'
+                    }).addTo(map);
                     const pathEl = pathLine.getElement();
                     if (pathEl) {
                         const length = pathEl.getTotalLength();
@@ -510,20 +658,35 @@
             progressOverlay.classList.remove('active');
         }
 
-        // >> UTILITIES
         function createMarkerIcon(color, size) {
-            return L.divIcon({ className: 'custom-marker', html: `<div style="background-color: ${color}; width: ${size}px; height: ${size}px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`, iconSize: [size, size] });
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${color}; width: ${size}px; height: ${size}px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [size, size]
+            });
         }
+
         function createPulsingIcon(color, size) {
-            return L.divIcon({ className: 'custom-marker', html: `<div class="pulse-marker" style="background-color: ${color}; width: ${size}px; height: ${size}px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 10px rgba(255,170,0,0.6);"></div>`, iconSize: [size, size] });
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div class="pulse-marker" style="background-color: ${color}; width: ${size}px; height: ${size}px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 10px rgba(255,170,0,0.6);"></div>`,
+                iconSize: [size, size]
+            });
         }
+
         function disableButtons(disabled) {
             document.getElementById('btnGreedy').disabled = disabled;
             document.getElementById('btnAstar').disabled = disabled;
             document.getElementById('startNode').disabled = disabled;
         }
+
         function resetVisualization() {
             if (isAnimating) return;
+            
+            // Clear calibration markers
+            calibrationMarkers.forEach(m => map.removeLayer(m));
+            calibrationMarkers = [];
+            
             animationLayers.forEach(layer => map.removeLayer(layer));
             animationLayers = [];
             polylines.forEach(p => map.removeLayer(p));
@@ -536,6 +699,7 @@
                 markers[name].setIcon(createMarkerIcon(isGoal ? 'green' : 'blue', 15));
             });
         }
+
         async function runGreedy() {
             if (isAnimating) return;
             isAnimating = true;
@@ -548,6 +712,7 @@
             isAnimating = false;
             disableButtons(false);
         }
+
         async function runAStar() {
             if (isAnimating) return;
             isAnimating = true;
@@ -560,6 +725,7 @@
             isAnimating = false;
             disableButtons(false);
         }
+
         function displayMetrics(algorithm, result, start) {
             const metricsDiv = document.getElementById(`${algorithm}Metrics`);
             metricsDiv.innerHTML = `
@@ -569,13 +735,42 @@
                 ${result.success ? `<div class="metric"><span class="metric-label">Path Length:</span><span class="metric-value">${result.path.length} barangays</span></div><div class="metric"><span class="metric-label">Path Cost:</span><span class="metric-value">${result.cost.toFixed(2)} km</span></div>` : ''}
                 <div class="metric"><span class="metric-label">Nodes Expanded:</span><span class="metric-value">${result.expansions.length}</span></div>`;
         }
+
         class MinHeap {
             constructor() { this.heap = []; }
             push(item) { this.heap.push(item); this.bubbleUp(this.heap.length - 1); }
-            pop() { if (this.heap.length === 0) return null; const min = this.heap[0]; const end = this.heap.pop(); if (this.heap.length > 0) { this.heap[0] = end; this.bubbleDown(0); } return min; }
+            pop() {
+                if (this.heap.length === 0) return null;
+                const min = this.heap[0];
+                const end = this.heap.pop();
+                if (this.heap.length > 0) {
+                    this.heap[0] = end;
+                    this.bubbleDown(0);
+                }
+                return min;
+            }
             isEmpty() { return this.heap.length === 0; }
-            bubbleUp(index) { while (index > 0) { const parentIndex = Math.floor((index - 1) / 2); if (this.heap[index].f >= this.heap[parentIndex].f) break; [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]]; index = parentIndex; } }
-            bubbleDown(index) { const length = this.heap.length; while (true) { let smallest = index; const left = 2 * index + 1; const right = 2 * index + 2; if (left < length && this.heap[left].f < this.heap[smallest].f) smallest = left; if (right < length && this.heap[right].f < this.heap[smallest].f) smallest = right; if (smallest === index) break; [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]]; index = smallest; } }
+            bubbleUp(index) {
+                while (index > 0) {
+                    const parentIndex = Math.floor((index - 1) / 2);
+                    if (this.heap[index].f >= this.heap[parentIndex].f) break;
+                    [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]];
+                    index = parentIndex;
+                }
+            }
+            bubbleDown(index) {
+                const length = this.heap.length;
+                while (true) {
+                    let smallest = index;
+                    const left = 2 * index + 1;
+                    const right = 2 * index + 2;
+                    if (left < length && this.heap[left].f < this.heap[smallest].f) smallest = left;
+                    if (right < length && this.heap[right].f < this.heap[smallest].f) smallest = right;
+                    if (smallest === index) break;
+                    [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+                    index = smallest;
+                }
+            }
         }
     </script>
 </body>
